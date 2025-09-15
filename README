@@ -1,0 +1,72 @@
+---------------------------------------------------------------------
+Compressible CFD solver written in C++ using CUDA
+Author: Hyeoksu Lee
+---------------------------------------------------------------------
+
+This code solves the 1D Lax shock tube problem using a Godunov-type 
+compressible flow solver.
+
+The 1D Lax shock tube problem is one of the canonical configurations
+used to test accuracy of compressible flow solvers. It demonstrate 
+the propagation of characteristic waves starting from a contact 
+discontinuity.
+
+---------------------------------------------------------------------
+
+Files included          Description
+   main.cpp             Main code for the simulation
+   solver-cpu.cpp/hpp   CPU implementation of the solver
+   solver-gpu.cpp/hpp   GPU implementation of the solver
+   print.cpp/hpp        Print data
+   var.h                Constants and structures
+   post.py              Visualization of output data
+
+---------------------------------------------------------------------
+
+Installation:
+
+   For the visualization using post.py, matplotlib is required:
+
+      "pip install matplotlib"
+
+---------------------------------------------------------------------
+
+For the CPU and GPU demo,
+1. Use command "make all" and then "./run". Then, the simulation time
+   for CPU and GPU will be printed as follows:
+
+   CPU: 3658.898193 ms
+   GPU: 760.981628 ms
+   GPU is 4.808129 times faster than CPU.
+
+2. Also, output files will be generated in "results" directory.
+   ("results" directory should exist.)
+
+   "cpu_t_%d.dat" contains the primitive flow variables at %d-th 
+                  saving time computed using CPU. The first row is 
+                  the time, and data are printed from the second row, 
+                  The first column is the posiiton of data point, and 
+                  the second, third, and fourth columns are density,
+                  velocity and pressure, respectively.
+   "gpu_t_%d.dat" contains the primitive flow variables at %d-th 
+                  saving time computed using GPU.
+
+3. For the visualization, run the python script
+
+   "python3 post.py"
+
+   Then, two mp4 files will be generated that show time evolution of 
+   primitive variables (density, velocity, and pressure).
+   
+   "cpu_results.mp4" and "gpu_results.mp4"
+   
+   ** I put all these results in "myresults" directory.
+
+---------------------------------------------------------------------
+
+Simulation results:
+The expected results are the propagation of characteristic waves. The
+animations are included in "myresults" directory. You may reproduce
+these results using this code following the above prodecure.
+
+---------------------------------------------------------------------
